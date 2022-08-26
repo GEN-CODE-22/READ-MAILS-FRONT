@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
+import { DataTable, Layout } from "../components";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <h1>Hola</h1>
-    </div>
+    <Layout>
+      <DataTable data={[]} columns={[]} id={""} />
+    </Layout>
   );
 };
 
