@@ -5,6 +5,7 @@ import {
   GridColDef,
   GridEditRowsModel,
   GridToolbar,
+  GridRowIdGetter,
 } from "@mui/x-data-grid";
 
 import { useCallback, useState } from "react";
@@ -13,7 +14,7 @@ import { CustomToolBar } from "./CustomToolBar";
 interface Props<T> {
   data: T[];
   columns: GridColDef[];
-  id: string;
+  id: GridRowIdGetter;
   height?: number;
   loading?: boolean;
   onRowClick?: (rowData: T) => void;
@@ -112,19 +113,10 @@ export const DataTable = <T extends {}>({
   }, []);
 
   return (
-    <div
-      className={`shadow-lg  rounded-xl bg-white  ${
-        data.length > 30
-          ? "h-screen overflow-y-auto"
-          : data.length > 20
-          ? "h-[30rem]"
-          : data.length > 8
-          ? "h-[28rem]"
-          : "h-[20rem]"
-      } `}
-    >
+    <div className={`shadow-lg  rounded-xl bg-white h-screen`}>
       <DataGrid
-        getRowId={(row) => row[id]}
+        // getRowId={(row) => row[id]}
+        getRowId={id}
         style={{
           border: "none ",
         }}

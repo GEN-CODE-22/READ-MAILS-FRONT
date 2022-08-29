@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
-import { DataTable, Layout } from "../components";
+import { Layout } from "../components";
+import { CorreosByDay } from "../components/CorreosByDay";
 
 const Home: NextPage = () => {
   return (
     <Layout>
-      <DataTable data={[]} columns={[]} id={""} />
+      <CorreosByDay />
     </Layout>
   );
 };
