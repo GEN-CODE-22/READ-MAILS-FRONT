@@ -4,7 +4,8 @@ import { DataTable } from "./Table";
 import { EmailFacturaError } from "../interfaces/interfaces";
 
 export const CorreosByDay = () => {
-  const { correosByDay, loading, columns } = useCorreos();
+  const { correosByDay, loading, columns, onClick } = useCorreos();
+
   return (
     <div>
       <DataTable
@@ -12,6 +13,8 @@ export const CorreosByDay = () => {
         columns={columns}
         id={(row) => (row as EmailFacturaError).parseEmail.id ?? ""}
         loading={loading}
+        onOneClick={onClick}
+        density="compact"
       />
     </div>
   );

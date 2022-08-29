@@ -15,7 +15,7 @@ export const CustomToolBar = () => {
         }}
       />
 
-      <GridToolbarDensitySelector />
+      {/* <GridToolbarDensitySelector /> */}
     </GridToolbarContainer>
   );
 };

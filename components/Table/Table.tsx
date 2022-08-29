@@ -6,6 +6,7 @@ import {
   GridEditRowsModel,
   GridToolbar,
   GridRowIdGetter,
+  GridDensity,
 } from "@mui/x-data-grid";
 
 import { useCallback, useState } from "react";
@@ -17,6 +18,7 @@ interface Props<T> {
   id: GridRowIdGetter;
   height?: number;
   loading?: boolean;
+  density?: GridDensity;
   onRowClick?: (rowData: T) => void;
   onOneClick?: (rowData: T) => void;
   [key: string]: any;
@@ -104,6 +106,7 @@ export const DataTable = <T extends {}>({
   loading,
   onRowClick,
   onOneClick,
+  density,
   ...props
 }: Props<T>) => {
   const [editRowsModel, setEditRowsModel] = useState({});
@@ -120,6 +123,7 @@ export const DataTable = <T extends {}>({
         style={{
           border: "none ",
         }}
+        density={density}
         className="rounded-xl"
         rows={data}
         columns={columns}
