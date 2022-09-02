@@ -4,7 +4,7 @@ import React from "react";
 
 export const SidenavHeader = () => {
   return (
-    <div className="bg-gray-900 flex flex-col pt-3 mb-6 pb-3 sticky cursor-pointer z-10">
+    <div className="bg-white flex flex-col pt-3 mb-6 pb-3 sticky cursor-pointer z-10">
       <Link href="/">
         <Image
           src="/gas-nieto.png"

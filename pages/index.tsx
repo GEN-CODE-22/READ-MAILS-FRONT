@@ -1,4 +1,5 @@
 import moment from "moment";
+import "moment/locale/es"; // without this line it didn't work
 import type { NextPage } from "next";
 import { Layout } from "../components";
 import { CorreosByDay } from "../components/CorreosByDay";
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
           Errores de Correos{" "}
         </h2>
         <h2 className="text-2xl mb-3 text-center font-extrabold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 text-center">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r text-red-800 text-center">
             {mes} {dia}
           </span>
         </h2>

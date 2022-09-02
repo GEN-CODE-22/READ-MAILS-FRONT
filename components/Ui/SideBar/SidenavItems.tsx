@@ -43,7 +43,7 @@ export const SidenavItems = () => {
                 <a
                   // className=  "text-base  text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 hover:dark:bg-gray-700 dark:bg-slate-800 group"
                   className={`mx-2 my-3 ${
-                    section.path === asPath && " bg-gray-900   "
+                    section.path === asPath && " bg-red-800   "
                   }
                     shadow-md hover:shadow-lg text-base font-normal flex rounded-lg p-2 group `}
                 >
