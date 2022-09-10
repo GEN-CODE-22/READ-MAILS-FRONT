@@ -5,7 +5,7 @@ import { StoreApp } from "../redux";
 import { setCloseModal } from "../redux/slices/modal/modal_slice";
 
 export const Modal = () => {
-  const { openModal, childrenModal, backdropClick } = useSelector(
+  const { openModal, childrenModal, backdropClick, sizeModal } = useSelector(
     (state: StoreApp) => state.modal
   );
   const dispatch = useDispatch();
@@ -22,10 +22,13 @@ export const Modal = () => {
       onClose={onClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      maxWidth="md"
+      maxWidth={sizeModal}
       fullWidth
+      role="note"
+      // TransitionComponent={Transition}
+      keepMounted
     >
-      <DialogContent>{childrenModal}</DialogContent>
+      <DialogContent className={`p-0 m-0`}>{childrenModal}</DialogContent>
     </Dialog>
   );
 };
