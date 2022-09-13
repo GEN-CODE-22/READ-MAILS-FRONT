@@ -27,6 +27,9 @@ export const Modal = () => {
       role="note"
       // TransitionComponent={Transition}
       keepMounted
+      sx={{
+        backdropFilter: "blur(10px)",
+      }}
     >
       <DialogContent className={`p-0 m-0`}>{childrenModal}</DialogContent>
     </Dialog>

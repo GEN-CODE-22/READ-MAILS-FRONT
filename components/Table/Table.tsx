@@ -146,6 +146,8 @@ export const DataTable = <T extends {}>({
             onOneClick(rowData.row as T);
           }
         }}
+        pagination
+        pageSize={50}
       />
     </div>
   );

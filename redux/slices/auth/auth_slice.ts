@@ -5,6 +5,7 @@ export interface AuthState {
   planta: string;
   cia: string;
   nombre: string;
+  server: string;
   auth: boolean;
 }
 
@@ -13,6 +14,7 @@ const initialState: AuthState = {
   cia: "",
   nombre: "",
   auth: false,
+  server: "",
 };
 
 export const AuthSlice = createSlice({
@@ -23,6 +25,7 @@ export const AuthSlice = createSlice({
       state.planta = action.payload.planta;
       state.cia = action.payload.cia;
       state.nombre = action.payload.nombre;
+      state.server = action.payload.server;
       state.auth = true;
     },
     clearPlanta: (state) => {
@@ -31,7 +34,10 @@ export const AuthSlice = createSlice({
       state.nombre = "";
       state.auth = false;
     },
+    setPl: (state, action: PayloadAction<string>) => {
+      state.planta = action.payload;
+    },
   },
 });
 
-export const { setPlanta, clearPlanta } = AuthSlice.actions;
+export const { setPlanta, clearPlanta, setPl } = AuthSlice.actions;

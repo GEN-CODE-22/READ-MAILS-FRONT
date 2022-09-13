@@ -15,9 +15,11 @@ export const useCorreos = () => {
     (state: StoreApp) => state.correos
   );
 
+  const { planta } = useSelector((state: StoreApp) => state.auth);
+
   useEffect(() => {
     dispatch(getCorreosByDay());
-  }, []);
+  }, [planta]);
 
   const columns = useMemo<GridEnrichedColDef<EmailFacturaError>[]>(
     () => [
@@ -75,12 +77,12 @@ export const useCorreos = () => {
   );
 
   const onClick = (mail: EmailFacturaError) => {
-    console.log(mail.parseEmail);
     dispatch(
       setOpenModal({
         openModal: true,
         childrenModal: <ErrorMail mail={mail.parseEmail} />,
         backdropClick: false,
+        sizeModal: "md",
       })
     );
   };

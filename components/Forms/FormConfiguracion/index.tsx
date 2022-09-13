@@ -1,34 +1,31 @@
 import { Form, Formik } from "formik";
 import React, { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
-import { PlantaGEN } from "../../../interfaces";
 import { AppDispatch } from "../../../redux";
-import { setPlanta } from "../../../redux/slices/auth/auth_slice";
+import { createAuthThunk } from "../../../redux/slices/auth/thunk";
 import { MyFormButton, MyInput } from "../../FormComponents";
-import { MyButton } from "../../Ui/Button";
 import { Plantas } from "./Plantas";
 
 interface InitialValues {
-  pl: string;
-  planta: string;
-  cia: string;
+  server: string;
   nombre: string;
+  password: string;
 }
 
 export const FormConfiguracion = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const initialValues: InitialValues = {
-    pl: "",
-    planta: "",
-    cia: "",
+    server: "",
     nombre: "",
+    password: "",
   };
 
   const onSubmit = (values: InitialValues) => {
+    // console.log(values);
     if (typeof window !== "undefined") {
-      localStorage.setItem("planta", values.pl);
-      dispatch(setPlanta(JSON.parse(values.pl) as PlantaGEN));
+      localStorage.setItem("planta", JSON.stringify(values));
+      dispatch(createAuthThunk(values));
     }
   };
 
@@ -43,21 +40,20 @@ export const FormConfiguracion = () => {
           <Form className="max-w-4xl mx-auto  rounded-xl bg-slate-200/20 ">
             <div className="py-5 px-5 space-y-5 ">
               <Plantas
-                label="Plantas"
-                name="pl"
+                label="Servidor"
+                name="servers"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  const planta = JSON.parse(e.target.value) as PlantaGEN;
-                  setFieldValue("cia", planta.cia);
-                  setFieldValue("nombre", planta.nombre);
-                  setFieldValue("planta", planta.planta);
-                  setFieldValue("pl", e.target.value);
+                  setFieldValue("server", e.target.value);
                 }}
               />
               <div className="grid grid-cols-2 gap-3 ">
-                <MyInput label={"cia"} name={"cia"} disabled />
-                <MyInput label={"planta"} name={"planta"} disabled />
+                <MyInput label={"Nombre"} name={"nombre"} type="text" />
+                <MyInput
+                  label={"Password"}
+                  name={"password"}
+                  type={"password"}
+                />
               </div>
-              <MyInput label={"Nombre"} name={"nombre"} disabled />
 
               <div className="flex mx-auto max-w-md">
                 <MyFormButton

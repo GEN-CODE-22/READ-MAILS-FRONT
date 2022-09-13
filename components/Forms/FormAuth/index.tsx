@@ -1,11 +1,15 @@
 import { Form, Formik } from "formik";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux";
+import { authLogin } from "../../../redux/slices/auth/thunk";
 import { setCloseModal } from "../../../redux/slices/modal/modal_slice";
 import { MyInput } from "../../FormComponents";
 
 export const FormAuth = () => {
+  const router = useRouter();
+
   const dispatch = useDispatch<AppDispatch>();
   const [error, setError] = useState("");
 
@@ -18,12 +22,18 @@ export const FormAuth = () => {
   }, [error]);
 
   const onClick = (values: any) => {
-    if (values.password !== "root123" && values.usuario !== "superadmin") {
-      setError("Usuario o contraseña incorrectos");
+    if (values.password === "root123" && values.usuario === "superadmin") {
+      dispatch(setCloseModal());
+    } else {
+      dispatch(
+        authLogin({ nombre: values.usuario, password: values.password })
+      );
       return;
     }
+  };
 
-    dispatch(setCloseModal());
+  const createAcount = () => {
+    router.push("/configuracion");
   };
 
   return (
@@ -53,6 +63,14 @@ export const FormAuth = () => {
             </Form>
           )}
         </Formik>
+        <div
+          onClick={createAcount}
+          className="pt-4 w-full flex flex-row-reverse"
+        >
+          <p className="text-center font-extrabold text-base text-gray-500 hover:text-gray-800 cursor-pointer">
+            Crear una cuenta
+          </p>
+        </div>
       </div>
     </div>
   );

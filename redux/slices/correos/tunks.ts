@@ -8,17 +8,25 @@ export const getCorreosByDay = () => {
   return async (dispatch: Dispatch, state: () => StoreApp) => {
     const {
       auth: { planta },
+      correos: { date },
     } = state();
 
     if (!!planta) {
       dispatch(setLoading(true));
       try {
         dispatch(setCorreosByDay([]));
-        const response = await mailsApi.get<IResponse<EmailFacturaError[]>>(
-          `/api/email/byDay?planta=${planta}`
+        const response = await mailsApi.post<IResponse<EmailFacturaError[]>>(
+          `/api/email/byDay`,
+          {
+            planta,
+            date,
+          }
         );
+
         dispatch(setLoading(false));
-        dispatch(setCorreosByDay(response.data.mails));
+        if (response.data.data.length > 0) {
+          dispatch(setCorreosByDay(response.data.data));
+        }
       } catch (error) {
         dispatch(setLoading(false));
       }

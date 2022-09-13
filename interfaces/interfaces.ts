@@ -10,6 +10,15 @@ export interface PlantaGEN {
   cia: string;
   planta: string;
   nombre: string;
+  server: string;
+}
+
+export interface PlGEN {
+  cia: string;
+  pla: string;
+  nombre: string;
+  id: number;
+  server: string;
 }
 
 export interface EmailFile {
@@ -46,6 +55,6 @@ export interface EmailFacturaError {
 
 export interface IResponse<T> {
   ok: boolean;
-  mails: T;
+  data: T;
   count: number;
 }

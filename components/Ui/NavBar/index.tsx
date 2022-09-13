@@ -11,9 +11,7 @@ export const NavBar: FC = ({}) => {
   const { toggle } = useToggle();
 
   const dispatch = useDispatch<AppDispatch>();
-  const { nombre, planta, cia, auth } = useSelector(
-    (state: StoreApp) => state.auth
-  );
+  const { nombre, auth, server } = useSelector((state: StoreApp) => state.auth);
 
   const onClick = () => {
     if (typeof window !== "undefined") {
@@ -44,7 +42,7 @@ export const NavBar: FC = ({}) => {
                   {!!auth ? (
                     <div className="flex">
                       <UserIcon width={25} height={25} />
-                      <h1 className="text-black text-lg">{`${cia}-${planta} ${nombre}`}</h1>
+                      <h1 className="text-black text-lg">{`${nombre}-${server}`}</h1>
                     </div>
                   ) : (
                     <h1 className="text-black text-lg">Sin Configuración</h1>
