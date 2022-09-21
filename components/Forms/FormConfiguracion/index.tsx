@@ -22,7 +22,6 @@ export const FormConfiguracion = () => {
   };
 
   const onSubmit = (values: InitialValues) => {
-    // console.log(values);
     if (typeof window !== "undefined") {
       localStorage.setItem("planta", JSON.stringify(values));
       dispatch(createAuthThunk(values));

@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <div className="max-w-6xl h-screen relative">
+      <div className="md:max-w-7xl max-w-full mx-auto h-screen relative">
         <DesktopDatePicker
           value={date}
           onChange={onChange}
