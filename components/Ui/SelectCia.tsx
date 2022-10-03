@@ -22,9 +22,14 @@ export const SelectCia = () => {
         `/api/auth/plantasEnabled?server=${server}`
       );
       setPlantasServer(response.data.data);
-      setPl(response.data.data[0]?.pla);
     }
   };
+
+  useEffect(() => {
+    if (plantasServer.length > 0 && !planta) {
+      dispatch(setPl(plantasServer[0].pla));
+    }
+  }, [plantasServer]);
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setPl(e.target.value));

@@ -11,7 +11,7 @@ import { ErrorMail } from "../components";
 export const useCorreos = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { correosByDay, loading } = useSelector(
+  const { correosByDay, loading, date } = useSelector(
     (state: StoreApp) => state.correos
   );
 
@@ -19,7 +19,7 @@ export const useCorreos = () => {
 
   useEffect(() => {
     dispatch(getCorreosByDay());
-  }, [planta]);
+  }, [planta, date]);
 
   const columns = useMemo<GridEnrichedColDef<EmailFacturaError>[]>(
     () => [
