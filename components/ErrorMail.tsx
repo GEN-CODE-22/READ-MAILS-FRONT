@@ -21,29 +21,62 @@ export const ErrorMail: FC<Props> = ({ mail }) => {
   );
 
   const handleTraslate = async () => {
-    const formData = new FormData();
-    formData.append("q", origin);
-    formData.append("source", "en");
-    formData.append("target", "es");
-    formData.append("format", "text");
-    formData.append("api_key", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
-    try {
-      setLoading(true);
-      const response = await axios.post(
-        `https://libretranslate.de/translate`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
-      setLoading(false);
-      setTraslateText(response.data.translatedText);
-    } catch (error) {
-      setLoading(false);
-      setTraslateText("Error al traducir");
-    }
+    console.log({ origin });
+
+    const encodedParams = new URLSearchParams();
+    encodedParams.append("q", origin);
+    encodedParams.append("format", "text");
+    encodedParams.append("target", "es");
+    encodedParams.append("source", "en");
+
+    const options = {
+      method: "POST",
+      url: "https://google-translate1.p.rapidapi.com/language/translate/v2",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        "Accept-Encoding": "application/gzip",
+        "X-RapidAPI-Key": "15b8a54399mshfb6e7ec4a9c2022p196ac9jsn0ef0dbce8c1d",
+        "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
+      },
+      data: encodedParams,
+    };
+
+    setLoading(true);
+
+    const response = await axios.request<{
+      data: {
+        translations: [{ translatedText: string }];
+      };
+    }>(options);
+    setLoading(false);
+    setTraslateText(response.data.data.translations[0].translatedText);
+
+    // const formData = new FormData();
+    // formData.append("q", origin);
+    // formData.append("source", "en");
+    // formData.append("target", "es");
+    // formData.append("format", "text");
+    // formData.append("api_key", "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
+    // try {
+    //   setLoading(true);
+    //   const response = await axios.post(
+    //     `https://libretranslate.com/translate`,
+    //     formData,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/x-www-form-urlencoded",
+    //       },
+    //     }
+    //   );
+    //   setLoading(false);
+    //   setTraslateText(response.data.translatedText);
+
+    //   console.log(r);
+    // } catch (error) {
+    //   console.log(error);
+    //   setLoading(false);
+    //   setTraslateText("Error al traducir");
+    // }
   };
 
   useEffect(() => {
